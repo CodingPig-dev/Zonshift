@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Auswahl Menü</title>
+<style>
+:root{
+  --bg-gradient: radial-gradient(circle at 50% 50%, rgba(6,80,185,1) 0%, rgba(6,80,185,0.85) 20%, rgba(10,165,251,0.65) 50%, rgba(10,165,251,1) 100%);
+  --panel-w:220px;
+  --panel-h:360px;
+  --gap:28px;
+  --border-color:rgba(173,216,255,0.95);
+  
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body {
+  margin: 0;
+  font-family: Inter, system-ui, Roboto, Arial;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-gradient);
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('background.png');
+  background-size: cover;
+  background-position: center;
+  filter: blur(6px); 
+  transform: scale(1.05);
+  z-index: -1;
+}
+.container{
+  width:100%;
+  max-width:980px;
+  padding:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1;
+}
+.stack{
+  display:flex;
+  gap:var(--gap);
+  align-items:center;
+  justify-content:center;
+}
+.box{
+  width:var(--panel-w);
+  height:var(--panel-h);
+  background:rgba(255,255,255,0.02);
+  border:3px solid var(--border-color);
+  box-shadow:inset 0 30px 60px rgba(0,0,0,0.12), 0 18px 48px rgba(0,0,0,0.35);
+  display:block;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  outline:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.box:active{transform:translateY(4px)}
+.box:focus{outline:4px solid rgba(173,216,255,0.18); outline-offset:8px}
+.box:hover{transform:translateY(-12px); box-shadow:0 30px 80px rgba(0,0,0,0.45)}
+.box .centerGlow{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:70%;
+  height:70%;
+  background:radial-gradient(circle at 50% 50%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 40%, transparent 70%);
+  pointer-events:none;
+  z-index:1;
+}
+.box.one{background:linear-gradient(180deg, rgba(124,60,255,0.03), rgba(90,34,240,0.02))}
+.box.two{background:linear-gradient(180deg, rgba(47,139,255,0.03), rgba(27,94,255,0.02))}
+.box.three{background:linear-gradient(180deg, rgba(50,208,122,0.03), rgba(25,168,74,0.02))}
+@media (max-width:980px){
+  .box{width:200px;height:320px}
+}
+@media (max-width:520px){
+  .stack{gap:14px}
+  .box{width:26vw;height:42vw}
+}
+</style>
+</head>
+<body>
+<main class="container" role="main">
+  <div class="stack" role="list">
+    <button class="box one" role="listitem" tabindex="0" data-mode="save-the-world" aria-label="Save The World">
+      <div class="centerGlow" aria-hidden="true"></div>
+    </button>
+    <button class="box two" role="listitem" tabindex="0" data-mode="battle-royale" aria-label="Battle Royale">
+      <div class="centerGlow" aria-hidden="true"></div>
+    </button>
+    <button class="box three" role="listitem" tabindex="0" data-mode="creative" aria-label="Creative">
+      <div class="centerGlow" aria-hidden="true"></div>
+    </button>
+  </div>
+</main>
+<script>
+const boxes=document.querySelectorAll('.box');
+boxes.forEach(b=>{b.addEventListener('click',()=>{boxes.forEach(x=>x.classList.remove('selected'));b.classList.add('selected');console.log('selected',b.dataset.mode)})});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown'){const f=document.activeElement;const idx=[...boxes].indexOf(f);boxes[(idx+1)%boxes.length].focus()}if(e.key==='ArrowLeft'||e.key==='ArrowUp'){const f=document.activeElement;const idx=[...boxes].indexOf(f);boxes[(idx-1+boxes.length)%boxes.length].focus()}});
+boxes[0].focus();
+</script>
+</body>
+</html>
