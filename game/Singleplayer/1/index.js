@@ -287,7 +287,7 @@ if (modelPath && modelPath.trim() !== '') {
         modelUrl = "../../" + modelPath;
     }
 } else {
-    modelUrl = '../../../assets/models/test.glb';
+  modelUrl = '../../../assets/skins/test.glb';
 }
 let playerModel = null;
 console.log('Loading model from', modelUrl);
@@ -464,3 +464,4 @@ function updateCamera(delta) {
     updateCamera(delta);
     renderer.render(scene,camera);
 })();
+
