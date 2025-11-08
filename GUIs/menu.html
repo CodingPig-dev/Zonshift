@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ZONSHIFT — Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <style>
+    :root{
+      --bg-dark:#0b0f18;
+      --accent-1:#7f3cff;
+      --accent-2:#22d3b0;
+      --accent-glow:rgba(127,60,255,0.18);
+      --button-text: #ffffff;
+      --panel: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.06);
+      --font-sans: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    html,body{ height:100%; margin:0; font-family:var(--font-sans), sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      background-color: var(--bg-dark);
+      background-image: url('../assets/background.png'), radial-gradient(1200px 600px at 10% 10%, rgba(34,211,160,0.06) 0%, transparent 16%), radial-gradient(900px 500px at 90% 80%, rgba(127,60,255,0.06) 0%, transparent 12%);
+      background-size: cover, cover, cover;
+      background-position: center bottom, center, center;
+      background-repeat: no-repeat;
+      display:flex; align-items:center; justify-content:center; }
+    body::before{ content: ""; position:fixed; inset:0; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><path d="M40 0 L80 23 L120 0 L160 23 L120 46 L80 23 L40 46 L0 23 Z" fill="none" stroke="rgba(255,255,255,0.015)"/></svg>'); background-repeat:repeat; mix-blend-mode:overlay; pointer-events:none; }
+    .logo{ position:absolute; left:18px; top:14px; width:320px; height:auto; display:block; mix-blend-mode: screen; filter:drop-shadow(0 8px 18px rgba(0,0,0,0.22)); z-index:80; }
+    .logo{ transition: transform 180ms ease, width 180ms ease, right 180ms ease, left 180ms ease, top 180ms ease, bottom 180ms ease; }
+    .controls{ position:absolute; top:22px; left:calc(18px + 320px + 20px); max-width:calc(100% - 358px); transform:none; display:flex; gap:16px; align-items:center; justify-content:flex-start; flex-wrap:wrap; z-index:85; }
+    @media (max-width:680px){ .controls{ left:50%; transform:translateX(-50%); } }
+    @media (max-width:680px){
+      .controls{ width:calc(100% - 48px); left:50%; transform:translateX(-50%); max-width:720px; }
+    }
+    .controls .zs-button{ --h:52px; font-size:39px; min-width:180px; }
+    @media (max-width:900px){
+      .controls .zs-button{ min-width:140px; font-size:22px; padding:0 20px; }
+    }
+    @media (max-width:680px){
+      .controls{ gap:10px; max-width:calc(100% - 48px); }
+      .controls .zs-button{
+        min-width:0;
+        flex: 1 1 0;
+        font-size:16px;
+        padding:10px 12px;
+        --h:48px;
+      }
+      .controls{ flex-wrap:nowrap; overflow:hidden; }
+    }
+    @media (max-width:420px){
+      .controls .zs-button{ font-size:14px; padding:8px 10px; --h:44px; }
+    }
+    model-viewer{ display:block; width:100%; height:100%; border-radius:18px; background: linear-gradient(180deg, rgba(255,255,255,0.00), rgba(255,255,255,0.00)); box-shadow: 0 12px 40px rgba(2,6,20,0.6); pointer-events:none; z-index:10; }
+    .zs-button{ --h:70px; display:inline-flex; align-items:center; justify-content:center; gap:12px; padding:0 26px; height:var(--h); background-color:transparent; color:var(--button-text); border:4px solid #000; cursor:pointer; user-select:none; position:relative; font-weight:800; font-size:28px; letter-spacing:1.2px; text-transform:none; border-radius:6px; transition: transform 160ms cubic-bezier(.2,.9,.3,1), box-shadow 160ms ease, filter 160ms ease; box-shadow:0 10px 0 rgba(3,6,23,0.55), 0 6px 30px rgba(34,211,160,0.04); padding-left:44px; min-width:200px; font-family: 'Anton', var(--font-sans), sans-serif; }
+    @media (max-width:680px){
+      .controls{ flex-wrap:nowrap; overflow:hidden; justify-content:space-between; }
+      .controls .zs-button{ min-width:0 !important; width:auto; flex:1 1 0; padding-left:10px; padding-right:10px; padding-top:8px; padding-bottom:8px; height:var(--h); box-sizing:border-box; }
+      .controls .zs-button .zs-icon{ left:8px; width:14px; height:14px; }
+    }
+    @media (max-width:420px){
+      .controls{ gap:8px; }
+      .controls .zs-button{ font-size:13px !important; padding:6px 8px !important; --h:44px; }
+    }
+    model-viewer{ display:block; width:100%; height:100%; border-radius:18px; background: linear-gradient(180deg, rgba(255,255,255,0.00), rgba(255,255,255,0.00)); box-shadow: 0 12px 40px rgba(2,6,20,0.6); pointer-events:none; z-index:10; }
+    .zs-button{ --h:70px; display:inline-flex; align-items:center; justify-content:center; gap:12px; padding:0 26px; height:var(--h); background-color:transparent; color:var(--button-text); border:4px solid #000; cursor:pointer; user-select:none; position:relative; font-weight:800; font-size:28px; letter-spacing:1.2px; text-transform:none; border-radius:6px; transition: transform 160ms cubic-bezier(.2,.9,.3,1), box-shadow 160ms ease, filter 160ms ease; box-shadow:0 10px 0 rgba(3,6,23,0.55), 0 6px 30px rgba(34,211,160,0.04); padding-left:44px; min-width:200px; font-family: 'Anton', var(--font-sans), sans-serif; }
+    .zs-icon{ position:absolute; left:14px; width:18px; height:18px; display:inline-block; fill:#fff; }
+    @media (max-width:420px){ .logo{ width:240px; left:12px; top:8px } .zs-button{ font-size:16px; padding:14px 20px; min-width:140px; } }
+    @media (max-width:680px){
+      .logo{ position:fixed; right:18px; bottom:18px; left:auto; top:auto; width:160px; transform:none; z-index:96; }
+    }
+    @media (max-width:420px){
+      .logo{ width:120px; right:12px; bottom:12px }
+    }
+    .zs-button.square{ --h:110px; position:fixed; left:18px; bottom:18px; width:var(--h); height:var(--h); padding:0; min-width:unset; display:inline-flex; align-items:center; justify-content:center; font-size:30px; border-radius:10px; z-index:95; box-shadow:0 10px 0 rgba(3,6,23,0.55), 0 6px 30px rgba(34,211,160,0.04); }
+    @media (max-width:420px){ .zs-button.square{ --h:56px; left:12px; bottom:12px; } }
+    #podium{ position:fixed; left:50%; transform:translateX(-50%); bottom:32px; width:900px; height:660px; display:flex; align-items:flex-end; justify-content:center; pointer-events:none; z-index:40; max-width:calc(100vw - 48px); }
+    #podium{ transform-origin: bottom center; transition: transform 200ms ease, bottom 200ms ease; }
+    .podium-base{ position:absolute; bottom:6px; width:68%; max-width:720px; height:108px; background: radial-gradient(closest-side, rgba(255,255,255,0.06), rgba(0,0,0,0.45)); border-radius:50%; box-shadow: 0 30px 90px rgba(0,0,0,0.6), 0 0 108px rgba(127,60,255,0.06) inset; backdrop-filter: blur(4px); }
+    .podium-base::after{ content: ""; position:absolute; left:50%; transform:translateX(-50%); top:18px; width:84%; height:24px; background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0)); border-radius:50%; }
+    model-viewer.podium-model{ width:660px; height:660px; transform: translateY(-36px); pointer-events:none; z-index:45; border-radius:0 !important; box-shadow:none !important; background:transparent !important; }
+    @media (max-width:420px){ #podium{ width:180px; height:140px; bottom:18px; } model-viewer.podium-model{ width:140px; height:140px; transform: translateY(-14px); } .podium-base{ height:22px; } }
+    @media (max-width:680px){
+      #podium{
+        transform: translateX(-50%) scale(0.62);
+        bottom:18px;
+        width:900px;
+        height:660px;
+      }
+    }
+    @media (max-width:420px){
+      #podium{ transform: translateX(-50%) scale(0.28); bottom:12px; }
+    }
+    @media (max-width:680px){
+      .controls{ width:calc(100% - 48px); left:50%; transform:translateX(-50%); }
+      .controls .zs-button{
+        min-width:0 !important;
+        flex: 1 1 calc(50% - 8px) !important;
+        max-width: calc(50% - 8px) !important;
+        padding-left:8px !important;
+        padding-right:8px !important;
+        font-size:13px !important;
+        box-sizing:border-box !important;
+        border-width:2px !important;
+        box-shadow:none !important;
+        white-space:nowrap !important;
+        overflow:hidden !important;
+        text-overflow:ellipsis !important;
+      }
+       .controls .zs-button .zs-icon{ left:6px !important; width:12px !important; height:12px !important; }
+     }
+    @media (max-width:420px){
+      .controls .zs-button{
+        font-size:12px !important;
+        padding-left:6px !important;
+        padding-right:6px !important;
+        border-width:1px !important;
+      }
+    }
+    </style>
+  <script>
+  (function enforceControlsLayout(){
+    const controls = document.querySelector('.controls');
+    if(!controls) return;
+    const buttons = Array.from(controls.querySelectorAll('.zs-button'));
+    function update(){
+      if(window.innerWidth <= 680){
+        controls.style.width = 'calc(100% - 48px)';
+        controls.style.left = '50%';
+        controls.style.transform = 'translateX(-50%)';
+        controls.style.flexWrap = 'nowrap';
+        buttons.forEach(btn=>{
+          btn.style.minWidth = '0';
+          btn.style.flex = '1 1 calc(50% - 8px)';
+          btn.style.maxWidth = 'calc(50% - 8px)';
+          btn.style.whiteSpace = 'nowrap';
+          btn.style.overflow = 'hidden';
+          btn.style.textOverflow = 'ellipsis';
+          btn.style.paddingLeft = '8px';
+          btn.style.paddingRight = '8px';
+          btn.style.borderWidth = '2px';
+          btn.style.boxShadow = 'none';
+        });
+      } else {
+        controls.style.width = '';
+        controls.style.left = '';
+        controls.style.transform = '';
+        controls.style.flexWrap = '';
+        buttons.forEach(btn=>{
+          btn.style.minWidth = '';
+          btn.style.flex = '';
+          btn.style.maxWidth = '';
+          btn.style.whiteSpace = '';
+          btn.style.overflow = '';
+          btn.style.textOverflow = '';
+          btn.style.paddingLeft = '';
+          btn.style.paddingRight = '';
+          btn.style.borderWidth = '';
+          btn.style.boxShadow = '';
+        });
+      }
+    }
+    window.addEventListener('resize', update);
+    window.addEventListener('orientationchange', update);
+    window.addEventListener('load', update);
+    setTimeout(update, 120);
+  })();
+  </script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+  <img src="../assets/logo.png" alt="ZONSHIFT" class="logo" id="title"/>
+  <div class="controls" role="toolbar" aria-label="Hauptmenü">
+    <button id="singleBtn" class="zs-button" type="button" aria-label="Singleplayer">
+      <span class="zs-icon" aria-hidden="true"></span>
+      Singleplayer
+    </button>
+    <button id="multiBtn" class="zs-button" type="button" aria-label="Multiplayer">
+      <span class="zs-icon" aria-hidden="true"></span>
+      Multiplayer
+    </button>
+  </div>
+  <button id="skinsBtn" class="zs-button square" type="button" aria-label="Skins">
+    Skins
+  </button>
+
+  <script>
+(function(){
+  const single = document.getElementById('singleBtn');
+  const multi = document.getElementById('multiBtn');
+  const skins = document.getElementById('skinsBtn');
+  if (!single || !multi) return;
+  function makePixelBg(btn, opts = {}){
+    const pixelSize = opts.pixelSize || 32;
+    const colors = opts.colors || ['#2c2843', '#68395f', '#e87b2c'];
+    const angleDeg = (typeof opts.angleDeg === 'number') ? opts.angleDeg : 320;
+    const width = Math.max(Math.round(btn.clientWidth) || 320, 120);
+    const height = Math.max(Math.round(btn.clientHeight) || 70, 32);
+
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+
+    const angle = (angleDeg % 360) * Math.PI / 180;
+    const cx = width / 2;
+    const cy = height / 2;
+    const len = Math.max(width, height) * Math.SQRT2;
+    const x0 = cx - Math.cos(angle) * len / 2;
+    const y0 = cy - Math.sin(angle) * len / 2;
+    const x1 = cx + Math.cos(angle) * len / 2;
+    const y1 = cy + Math.sin(angle) * len / 2;
+
+    const grad = ctx.createLinearGradient(x0, y0, x1, y1);
+    grad.addColorStop(0, colors[0]);
+    grad.addColorStop(0.5, colors[1]);
+    grad.addColorStop(1, colors[2]);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, width, height);
+
+    const canvasPixel = document.createElement('canvas');
+    canvasPixel.width = width;
+    canvasPixel.height = height;
+    const ctxPixel = canvasPixel.getContext('2d');
+
+    for (let y = 0; y < height; y += pixelSize) {
+      for (let x = 0; x < width; x += pixelSize) {
+        const sx = Math.min(Math.floor(x + pixelSize / 2), width - 1);
+        const sy = Math.min(Math.floor(y + pixelSize / 2), height - 1);
+        const d = ctx.getImageData(sx, sy, 1, 1).data;
+        ctxPixel.fillStyle = `rgba(${d[0]},${d[1]},${d[2]},${d[3]/255})`;
+        ctxPixel.fillRect(x, y, pixelSize, pixelSize);
+      }
+    }
+
+    const dataURL = canvasPixel.toDataURL();
+    btn.style.backgroundImage = `url(${dataURL})`;
+    btn.style.backgroundSize = 'cover';
+    btn.style.backgroundRepeat = 'no-repeat';
+    btn.style.color = '#fff';
+  }
+  makePixelBg(single);
+  makePixelBg(multi);
+  if(skins) makePixelBg(skins);
+  let __resizeTimer;
+  window.addEventListener('resize', ()=>{
+    clearTimeout(__resizeTimer);
+    __resizeTimer = setTimeout(()=>{
+      makePixelBg(single);
+      makePixelBg(multi);
+      if(skins) makePixelBg(skins);
+    }, 180);
+  });
+
+  function setLoading(btn, state){
+    if(state){
+      btn.setAttribute('aria-busy','true');
+      btn.disabled = true;
+      btn._orig = btn.textContent;
+      btn.textContent = 'Loading...';
+    } else {
+      btn.removeAttribute('aria-busy');
+      btn.disabled = false;
+      if(btn._orig) btn.textContent = btn._orig;
+    }
+  }
+  single.addEventListener('click', () => {
+    if(single.disabled) return;
+    setLoading(single, true);
+    setTimeout(()=>{ setLoading(single, false); console.log('Singleplayer gestartet'); }, 900);
+    window.location.href = 'mode.html';
+  });
+  multi.addEventListener('click', () => {
+    if(multi.disabled) return;
+    setLoading(multi, true);
+    setTimeout(()=>{ setLoading(multi, false); console.log('Multiplayer gestartet'); }, 900);
+  });
+
+  if(skins){
+    skins.addEventListener('click', ()=>{
+      if(skins.disabled) return;
+      setLoading(skins, true);
+      setTimeout(()=>{ setLoading(skins, false); console.log('Skins geöffnet'); }, 600);
+      window.location.href = '../assets/picker.html';
+    });
+  }
+
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === '1') single.click();
+    if(e.key === '2') multi.click();
+    if(e.key === '3' && skins) skins.click();
+    if(document.activeElement === document.body && e.key === 'Enter'){
+      single.focus();
+    }
+  });
+})();
+function setGlb(url){
+ localStorage.setItem("Model", url);
+}
+</script>
+  <div id="podium" aria-hidden="true">
+    <model-viewer id="podiumModel" class="podium-model" src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" alt="Astronaut" shadow-intensity="1" interaction-prompt="none" exposure="1" aria-hidden="true" crossorigin="anonymous" environment-image="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/16k%2B/preller_drive_16k.hdr"></model-viewer>
+    <div class="podium-base" aria-hidden="true"></div>
+  </div>
+
+  <script>
+
+  (function setPodiumModel(){
+    try{
+      const mv = document.getElementById('podiumModel');
+      if(!mv) return;
+      const stored = localStorage.getItem('Model');
+      const fallback = '../assets/skins/test/test.gltf';
+      const hdr = 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/8k/satara_night_no_lamps_8k.hdr';
+      try{ mv.setAttribute('crossorigin', 'anonymous'); mv.setAttribute('environment-image', hdr); }catch(e){ console.warn('Could not set environment-image or crossorigin attribute', e); }
+      if(stored && typeof stored === 'string' && stored.trim().length > 0){
+        mv.src = stored.trim();
+        console.log('podiumModel src gesetzt aus localStorage:', mv.src);
+      } else {
+        mv.src = fallback;
+        console.log('podiumModel: kein Model in localStorage, Fallback verwendet');
+      }
+    }catch(err){
+      console.error('Fehler beim Setzen des podiumModel src', err);
+    }
+  })();
+  </script>
+
+  <script>
+  (function positionControls(){
+    const logo = document.querySelector('.logo');
+    const controls = document.querySelector('.controls');
+    if(!logo || !controls) return;
+    function update(){
+      const lr = logo.getBoundingClientRect();
+      const cr = controls.getBoundingClientRect();
+
+      if(window.innerWidth <= 680){
+        controls.style.left = '50%';
+        controls.style.transform = 'translateX(-50%)';
+        controls.style.top = '';
+        return;
+      }
+      const left = Math.round(lr.right + 20);
+      controls.style.left = left + 'px';
+      const top = Math.round(lr.top + (lr.height - cr.height) / 2);
+      controls.style.top = (top > 8 ? top : 8) + 'px';
+      controls.style.transform = 'none';
+    }
+    window.addEventListener('resize', update);
+    window.addEventListener('load', update);
+    setTimeout(update, 120);
+  })();
+  </script>
+
+  <script>
+  (function responsivePodium(){
+    const podium = document.getElementById('podium');
+    if(!podium) return;
+    function update(){
+      const maxLogicalWidth = 900;
+      const logicalHeight = 660;
+      const horizontalPadding = 48;
+      const availW = Math.max(window.innerWidth - horizontalPadding, 120);
+      const availH = Math.max(window.innerHeight - 120, 160);
+      const scaleByWidth = availW / maxLogicalWidth;
+      const scaleByHeight = availH / logicalHeight;
+      let scale = Math.min(1, scaleByWidth, scaleByHeight);
+      scale = Math.max(0.18, Math.min(1, scale));
+      podium.style.transform = `translateX(-50%) scale(${scale})`;
+      const baseBottom = 32;
+      const newBottom = Math.max(8, Math.round(baseBottom * Math.max(scale, 0.22)));
+      podium.style.bottom = newBottom + 'px';
+      podium.style.left = '50%';
+    }
+    window.addEventListener('resize', update);
+    window.addEventListener('orientationchange', update);
+    window.addEventListener('load', update);
+    setTimeout(update, 120);
+  })();
+  </script>
+</body>
+</html>
+
