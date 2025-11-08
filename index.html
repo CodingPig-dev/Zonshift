@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ZONSHIFT — Startscreen</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-dark:#0b0f18;
+  --accent-1:#7f3cff;
+  --accent-2:#22d3b0;
+  --accent-glow:rgba(127,60,255,0.18);
+  --button-text: #ffffff;
+  --panel: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.06);
+  --font-sans: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+html,body{
+  height:100%;
+  margin:0;
+  font-family:var(--font-sans);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background:
+    radial-gradient(1200px 600px at 10% 10%, rgba(34,211,160,0.06) 0%, transparent 16%),
+    radial-gradient(900px 500px at 90% 80%, rgba(127,60,255,0.06) 0%, transparent 12%),
+    linear-gradient(180deg, var(--bg-dark) 0%, #081024 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+body::before{
+  content: "";
+  position:fixed;
+  inset:0;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><path d="M40 0 L80 23 L120 0 L160 23 L120 46 L80 23 L40 46 L0 23 Z" fill="none" stroke="rgba(255,255,255,0.015)"/></svg>');
+  background-repeat:repeat;
+  mix-blend-mode:overlay;
+  pointer-events:none;
+}
+.stage{
+  width:100%;
+  max-width:920px;
+  padding:48px 24px;
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:32px;
+  text-align:center;
+  position:relative;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+.logo-wrap{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.logo{
+  width: min(720px,86%);
+  max-width:900px;
+  height:auto;
+  display:block;
+  mix-blend-mode: screen;
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,0.22));
+  image-rendering:-webkit-optimize-contrast;
+}
+.zs-button{
+  --h:64px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:0 26px;
+  height:var(--h);
+  background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 100%);
+  color:var(--button-text);
+  border:0;
+  cursor:pointer;
+  user-select:none;
+  position:relative;
+  font-weight:800;
+  font-size:16px;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  border-radius:12px 6px 18px 6px;
+  transition: transform 160ms cubic-bezier(.2,.9,.3,1), box-shadow 160ms ease, filter 160ms ease;
+  box-shadow:0 10px 0 rgba(3,6,23,0.55), 0 6px 30px rgba(34,211,160,0.06);
+  padding-left:48px;
+  min-width:240px;
+  overflow:visible;
+}
+.zs-button::before{
+  content:'';
+  position:absolute;
+  left:-10px;
+  top:6px;
+  bottom:6px;
+  width:36px;
+  border-radius:8px 6px 10px 6px;
+  background:linear-gradient(180deg,var(--accent-1),var(--accent-2));
+  box-shadow: 0 8px 24px var(--accent-glow);
+  transform:skewX(-8deg);
+}
+.zs-button::after{
+  content:'';
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  background: linear-gradient(90deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 20%, rgba(255,255,255,0.0) 45%);
+  mix-blend-mode:overlay;
+  pointer-events:none;
+  transform:translateX(-120%);
+  transition: transform 600ms cubic-bezier(.2,.9,.3,1);
+}
+.zs-button:hover::after{ transform:translateX(120%); }
+.zs-button:hover{ transform: translateY(-6px) scale(1.02); filter:brightness(1.02); }
+.zs-button:active{ transform: translateY(2px) scale(.995); box-shadow: 0 4px 0 rgba(3,6,23,0.6); }
+.zs-icon{
+  position:absolute;
+  left:14px;
+  width:22px;
+  height:22px;
+  display:inline-block;
+  fill:#fff;
+  transform:translateY(0px);
+  filter: drop-shadow(0 6px 14px rgba(11,15,24,0.6));
+}
+.kbd-hint{
+  margin-top:6px;
+  color:rgba(230,238,252,0.75);
+  font-size:13px;
+  font-weight:600;
+}
+@media (max-width:420px){
+  .logo{ width:92%; }
+  .zs-button{ font-size:18px; padding:14px 34px; min-width:180px; }
+}
+</style>
+</head>
+<body>
+<main class="stage" role="main" aria-labelledby="title">
+  <div class="logo-wrap">
+    <img src="assets/logo.png" alt="ZONSHIFT" class="logo" id="title"/>
+
+  </div>
+
+  <button class="zs-button" id="startBtn" aria-label="Spiel starten" title="Spiel starten">
+    <svg class="zs-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M3 11v2h12l-4 4 1.4 1.4L21 12 12.4 2.6 11 4l4 4H3z"></path>
+    </svg>
+    Start Game
+  </button>
+
+  <div class="kbd-hint" aria-hidden="true">Press ENTER or click to start</div>
+</main>
+
+<script>
+(function(){
+  const btn = document.getElementById('startBtn');
+  function setLoading(state){
+    if(state){
+      btn.setAttribute('aria-busy','true');
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+      window.location.href = 'GUIs/menu.html';
+    } else {
+      btn.removeAttribute('aria-busy');
+      btn.disabled = false;
+      btn.textContent = 'SPIEL STARTEN';
+    }
+  }
+  btn.addEventListener('click', () => {
+    if(btn.disabled) return;
+    setLoading(true);
+    setTimeout(()=>{
+      setLoading(false);
+      console.log('Startaktion ausgelöst');
+    }, 900);
+  });
+  btn.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      btn.click();
+    }
+  });
+  window.addEventListener('keydown', (e)=>{
+    if(document.activeElement === document.body && (e.key.length === 1 || e.key === 'Enter')){
+      btn.focus();
+      btn.click();
+    }
+  });
+})();
+</script>
+</body>
+</html>
